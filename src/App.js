@@ -2,6 +2,11 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Listitems from './Listitems'
+import {library} from'@fortawesome/fontawesome-svg-core'
+import {faTrash} from'@fortawesome/free-solid-svg-icons'
+
+
+library.add(faTrash);
  class App extends React.Component{
    constructor(props) {
      super(props)
@@ -15,6 +20,7 @@ import Listitems from './Listitems'
    }
    this.handleInput=this.handleInput.bind(this);
    this.addItem=this.addItem.bind(this);
+   this.deleteItem=this.deleteItem.bind(this)
   }
    handleInput(e){
      this.setState({
@@ -27,9 +33,8 @@ import Listitems from './Listitems'
    }
    addItem(e){
      e.preventDefault();
-     const newItem =this.state.currentItem;
-     console.log(newItem);
-     if(newItem.text==""){
+     const newItem =this.state.currentItem;     
+     if(newItem.text!==""){
        const newItems=[...this.state.items,newItem];
        this.setState({
          items:newItems,
@@ -44,6 +49,13 @@ import Listitems from './Listitems'
 
    }
    
+   deleteItem(key){
+     const filteredItems=this.state.items.filter(item=>item.key!==key);
+     this.setState({
+       items:filteredItems
+     })
+
+   }
   render() {
     return (
       <div className="App" onSubmit={this.addItem}>
@@ -56,7 +68,7 @@ import Listitems from './Listitems'
       </div>
         </form>
         </header> 
-        <Listitems items={this.state.items}/>
+        <Listitems items={this.state.items} deleteItem={this.deleteItem}/>
       </div>
     
     )
