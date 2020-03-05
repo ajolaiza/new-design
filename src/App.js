@@ -62,7 +62,7 @@ library.add(faTrash);
         <header>
         <form id="to-do-form">
         <div>
-        <h1>Hello World</h1>
+        <h1>Todo app</h1>
         <input type="text" placeholder="enter your info" value={this.state.currentItem.text} onChange={this.handleInput}/>
         <button type="submit" >Add</button>
       </div>
